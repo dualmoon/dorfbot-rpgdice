@@ -24,7 +24,7 @@ module.exports = (robot) ->
     else
       results = []
       results.push(randint sides) for [1..num]
-      return results.toString
+      return results.toString()
 
   robot.respond /roll (?:([0-9]+)d([0-9]+))(?: (.*))*/i, (msg) ->
     num = msg.match[1]
