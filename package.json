@@ -1,7 +1,7 @@
 {
-  "name": "rpgdice",
+  "name": "dorfbot-rpgdice",
   "description": "Rolls dice!",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Ashley Luna <luna@airsi.de>",
   "license": "MIT",
 
