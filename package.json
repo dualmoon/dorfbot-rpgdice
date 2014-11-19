@@ -1,0 +1,43 @@
+{
+  "name": "rpgdice",
+  "description": "Rolls dice!",
+  "version": "1.0.0",
+  "author": "Ashley Luna <luna@airsi.de>",
+  "license": "MIT",
+
+  "keywords": [
+    "hubot",
+    "hubot-scripts",
+    "dorfbot",
+    "dorfbot-scripts",
+    "rpg",
+    "roleplaying",
+    "dice"
+  ],
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dualmoon/dorfbot-rpgdice.git"
+  },
+
+  "bugs": {
+    "url": "https://github.com/dualmoon/dorfbot-rpgdice/issues"
+  },
+
+  "dependencies": {
+    "coffee-script": "~1.6"
+  },
+
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "sinon-chai": "*",
+    "sinon": "*"
+  },
+
+  "main": "index.coffee",
+
+  "scripts": {
+    "test": "script/test"
+  }
+}
