@@ -26,8 +26,7 @@ module.exports = (robot) ->
       results.push(randint sides) for [1..num]
       return results
 
-  robot.hear /roll ([0-9]+d[0-9]+)(?: (.*))*/i, (msg) ->
-    matches = msg.match[1].split('d')
-    num = matches[0]
-    sides = matches[1]
+  robot.respond /roll (?:([0-9]+)d([0-9]+))(?: (.*))*/i, (msg) ->
+    num = matches[1]
+    sides = matches[2]
     msg.send(rolldice sides, num)
