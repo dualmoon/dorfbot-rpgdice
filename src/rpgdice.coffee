@@ -20,11 +20,11 @@ module.exports = (robot) ->
     return Math.round(Math.random()*(sides-1))+1
   rolldice = (sides, num) ->
     if num is 1
-      return randint sides
+      return 0+randint sides
     else
       results = []
       results.push(randint sides) for [1..num]
-      return results
+      return results.toString
 
   robot.respond /roll (?:([0-9]+)d([0-9]+))(?: (.*))*/i, (msg) ->
     num = msg.match[1]
