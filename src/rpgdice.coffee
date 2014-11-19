@@ -27,6 +27,6 @@ module.exports = (robot) ->
       return results
 
   robot.respond /roll (?:([0-9]+)d([0-9]+))(?: (.*))*/i, (msg) ->
-    num = matches[1]
-    sides = matches[2]
+    num = msg.match[1]
+    sides = msg.match[2]
     msg.send(rolldice sides, num)
