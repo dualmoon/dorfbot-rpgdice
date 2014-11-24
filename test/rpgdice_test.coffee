@@ -12,8 +12,22 @@ describe 'rpgdice', ->
 
     require('../src/rpgdice')(@robot)
 
-  it 'registers a respond listener for "roll"', ->
+  it 'listens for "roll" and responds to a valid roll', ->
     expect(@robot.respond).to.have.been.calledWith(/roll (?:([0-9]+)d([0-9]+))(?: (.*))*/i)
+    expect(@robot.respond).to.have.been.calledWithMatch sinon.match( (val) ->
+      val.test /roll 2d4/
+    )
 
-  it 'registers a respond listener for "ore"', ->
+  it 'listens for "ore" and responds to a valid roll', ->
     expect(@robot.respond).to.have.been.calledWith(/ore (\d+)( \d+)?( \d+)?( .+)?/im)
+    expect(@robot.respond).to.have.been.calledWithMatch sinon.match( (val) ->
+      val.test /ore 2/
+      val.test /ore 2 test/
+      val.test /ore 2 4/
+      val.test /ore 2 4 test/
+      val.test /ore 2 4 5/
+      val.test /ore 2 4 5 test/
+    )
+    expect(@robot.respond).to.not.have.been.calledWithMatch sinon.match( (val) ->
+      val.test /ore test/
+    )
