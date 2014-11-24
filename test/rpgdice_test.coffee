@@ -12,5 +12,8 @@ describe 'rpgdice', ->
 
     require('../src/rpgdice')(@robot)
 
-  it 'registers a hear listener', ->
-    expect(@robot.hear).to.have.been.calledWith(/roll 1d6/)
+  it 'registers a respond listener for "roll"', ->
+    expect(@robot.respond).to.have.been.calledWith(/roll (?:([0-9]+)d([0-9]+))(?: (.*))*/i)
+
+  it 'registers a respond listener for "ore"', ->
+    expect(@robot.respond).to.have.been.calledWith(/ore (\d+)( \d+)?( \d+)?( .+)?/im)
