@@ -33,7 +33,7 @@ module.exports = (robot) ->
     for num in [1..10]
       occurrences = count(rolls,num)
       if occurrences > 1
-        matches.push "#{num}x#{occurrences}"
+        matches.push "#{occurrences}x#{num}"
     if matches.length > 0
       return matches
     else
