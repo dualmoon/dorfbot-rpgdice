@@ -32,16 +32,22 @@ module.exports = (robot) ->
     sides = msg.match[2]
     rolls = rolldice sides, num
     rolls.sort()
-    rollsTotal = 0
-    rollsTotal += i for i in rolls
-    msg.send "You rolled #{rolls.toString().split(',').join(', ')} for a total of #{rollsTotal}"
+    message = []
+    message.push "You rolled #{rolls.toString().split(',').join(', ')}"
+    if rolls.length > 1
+      rollsTotal = 0
+      rollsTotal += i for i in rolls
+      message.push " for a total of #{rollsTotal}."
+    else
+      message.push '.'
+    msg.send message.join(' ')
 
   robot.respond /ore (\d+)( \d+)?( \d+)?( .+)?/im, (msg) ->
     ### <number of dice> [<called>] [<expert>] [<note>] ###
 
     num = msg.match[1]
     if num > 10 or num < 1
-      return msg.send "You must roll between 1 and 10 dice"
+      return msg.send 'You must roll between 1 and 10 dice'
     rolls = rolldice(10,num)
 
     note = called = expert = ""
