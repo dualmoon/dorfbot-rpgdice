@@ -34,7 +34,7 @@ module.exports = (robot) ->
     rolls.sort()
     rollsTotal = 0
     rollsTotal += i for i in rolls
-    msg.send "You rolled #{rolls.toString().replace(',', ', ')} for a total of #{rollsTotal}"
+    msg.send "You rolled #{rolls.split(',').join(', ')} for a total of #{rollsTotal}"
 
   robot.respond /ore (\d+)( \d+)?( \d+)?( .+)?/im, (msg) ->
     ### <number of dice> [<called>] [<expert>] [<note>] ###
