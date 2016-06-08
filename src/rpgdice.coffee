@@ -34,18 +34,18 @@ module.exports = (robot) ->
     rolls.sort()
     rollsTotal = 0
     rollsTotal += i for i in rolls
-    msg.send("You rolled #{rolls} for a total of #{rollsTotal}")
+    msg.send "You rolled #{rolls} for a total of #{rollsTotal}"
 
   robot.respond /ore (\d+)( \d+)?( \d+)?( .+)?/im, (msg) ->
     ### <number of dice> [<called>] [<expert>] [<note>] ###
-    
+
     num = msg.match[1]
     if num > 10 or num < 1
       return msg.send "You must roll between 1 and 10 dice"
     rolls = rolldice(10,num)
-      
+
     note = called = expert = ""
-    
+
     called = parseInt(msg.match[2])
     if called isnt NaN
       if called > 10 or called < 1
@@ -61,6 +61,6 @@ module.exports = (robot) ->
         return msg.send "For someone with \"expert\" dice you sure aren't an expert at basic math. Expert dice have 10 sides."
       else
         rolls.push expert
-        
+
     rolls.sort()
     msg.send "num: #{num}, note: #{note}, called: #{called}, expert: #{expert}, rolls: #{rolls}"
