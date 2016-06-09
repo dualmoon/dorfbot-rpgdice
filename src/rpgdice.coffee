@@ -70,7 +70,10 @@ module.exports = (robot) ->
       else
         rolls.push called
 
-    note = msg.match[4] or ""
+    if msg.match[4]
+      note = ", Note: #{msg.match[4]}"
+    else
+      note = ""
 
     if msg.match[3] and typeof(expert) is 'number'
       expert = parseInt(msg.match[3])
@@ -82,4 +85,4 @@ module.exports = (robot) ->
     rolls.sort()
     #msg.send "num: #{num}, note: #{note}, called: #{called}, expert: #{expert}, rolls: #{rolls}"
     matches = matchORE(rolls)
-    msg.send "rolled: #{num}, rolls: #{rolls.join(', ')}, matches: #{matches.join (', ')}"
+    msg.send "You rolled: #{rolls.join(', ')}, Sets: #{matches.join (', ')}#{note}"
