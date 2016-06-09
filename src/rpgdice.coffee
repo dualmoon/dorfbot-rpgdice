@@ -82,4 +82,4 @@ module.exports = (robot) ->
     rolls.sort()
     #msg.send "num: #{num}, note: #{note}, called: #{called}, expert: #{expert}, rolls: #{rolls}"
     matches = matchORE(rolls)
-    msg.send "rolled: #{num}, rolls: #{rolls}, matches: #{matches}"
+    msg.send "rolled: #{num}, rolls: #{rolls.join(', ')}, matches: #{matches.join (', ')}"
