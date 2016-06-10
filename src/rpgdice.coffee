@@ -54,7 +54,8 @@ module.exports = (robot) ->
     if rolls.length > 1
       rollsTotal = 0
       rollsTotal += i for i in rolls
-      message.push "for a total of #{rollsTotal}."
+      rollsTotalPlus += modifier if modifier
+      message.push "for a total of #{rollsTotalPlus}."
     else
       message.push '.'
     message.push " Note: #{note}" if note
