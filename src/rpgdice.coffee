@@ -9,6 +9,7 @@
 #
 # Commands:
 #   hubot roll 2d6
+#   hubot ore 10
 #
 # Author:
 #   dualmoon
@@ -43,16 +44,20 @@ module.exports = (robot) ->
   robot.respond /roll (?:([0-9]+)d([0-9]+))(?: (.*))*/i, (msg) ->
     num = msg.match[1]
     sides = msg.match[2]
+    modifier = false or msg.match[3]
+    note = false or msg.match[4]
     rolls = rolldice sides, num
     rolls.sort()
     message = []
     message.push "You rolled #{rolls.toString().split(',').join(', ')}"
+    message.push "+#{modifier}" if modifier
     if rolls.length > 1
       rollsTotal = 0
       rollsTotal += i for i in rolls
-      message.push " for a total of #{rollsTotal}."
+      message.push "for a total of #{rollsTotal}."
     else
       message.push '.'
+    message.push " Note: #{note}" if note
     msg.send message.join(' ')
 
   robot.respond /ore (\d+)( \d+)?( \d+)?( .+)?/im, (msg) ->
@@ -63,7 +68,7 @@ module.exports = (robot) ->
       return msg.send 'You must roll between 1 and 10 dice'
     rolls = rolldice(10,num)
 
-    if msg.match[2] and typeof(expert) is 'number'
+    if msg.match[2] and typeof(msg.match[2]) is 'number'
       called = parseInt(msg.match[2])
       if called > 10 or called < 1
         return msg.send "They're d10s, you idiot. You can't call a side that doesn't exist."
@@ -75,7 +80,7 @@ module.exports = (robot) ->
     else
       note = ""
 
-    if msg.match[3] and typeof(expert) is 'number'
+    if msg.match[3] and typeof(msg.match[3]) is 'number'
       expert = parseInt(msg.match[3])
       if expert > 10 or expert < 1
         return msg.send "For someone with \"expert\" dice you sure aren't an expert at basic math. Expert dice have 10 sides."
