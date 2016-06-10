@@ -42,9 +42,9 @@ module.exports = (robot) ->
 
   # Basic die roller
   robot.respond /roll (?:([0-9]+)d([0-9]+))(?:\+([0-9])+)?(?: (.*))*/i, (msg) ->
-    num = msg.match[1]
-    sides = msg.match[2]
-    modifier = false or msg.match[3]
+    num = parseInt(msg.match[1])
+    sides = parseInt(msg.match[2])
+    modifier = false or parseInt(msg.match[3])
     note = false or msg.match[4]
     rolls = rolldice sides, num
     rolls.sort()
