@@ -41,7 +41,7 @@ module.exports = (robot) ->
       return false
 
   # Basic die roller
-  robot.respond /roll (?:([0-9]+)d([0-9]+))(?:\+([0-9])+)?(?: (.*))*/i, (msg) ->
+  robot.respond /roll (?:([1-9][0-9]*)d([1-9][0-9]*))(?:\+([1-9][0-9]*))?(?: (.*))*$/i, (msg) ->
     quantity = parseInt(msg.match[1])
     sides = parseInt(msg.match[2])
     modifier = parseInt(msg.match[3]) or 0
