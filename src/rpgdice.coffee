@@ -47,11 +47,11 @@ module.exports = (robot) ->
     modifier = false or parseInt(msg.match[3])
     note = false or msg.match[4]
     rolls = rolldice sides, num
-    rolls.sort()
     message = []
     message.push "You rolled #{rolls.toString().split(',').join(', ')}"
     message.push "+#{modifier}" if modifier
     if rolls.length > 1
+      rolls.sort()
       rollsTotal = 0
       rollsTotal += i for i in rolls
       rollsTotalPlus = rollsTotal + modifier
