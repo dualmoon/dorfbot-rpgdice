@@ -58,7 +58,7 @@ module.exports = (robot) ->
       tokens.rolls = rolls.toString().split(',').join(', ')
       tokens.total = " for a total of #{rollsTotalPlus}"
     else
-      tokens.rolls = rolls[0]
+      tokens.rolls = rolls.toString()
     tokens.note = " Note: #{note}" if note
     msg.send "#{tokens.start} #{tokens.rolls}#{tokens.modifier or ''}#{tokens.total or ''}.#{tokens.note or ''}"
 
