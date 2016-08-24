@@ -42,24 +42,25 @@ module.exports = (robot) ->
 
   # Basic die roller
   robot.respond /roll (?:([0-9]+)d([0-9]+))(?:\+([0-9])+)?(?: (.*))*/i, (msg) ->
-    num = parseInt(msg.match[1])
+    quantity = parseInt(msg.match[1])
     sides = parseInt(msg.match[2])
-    modifier = false or parseInt(msg.match[3])
-    note = false or msg.match[4]
-    rolls = rolldice sides, num
-    message = []
-    message.push "You rolled #{rolls.toString().split(',').join(', ')}"
-    message.push "+#{modifier}" if modifier
+    modifier = parseInt(msg.match[3]) or 0
+    note = msg.match[4] or false
+    rolls = rolldice sides, quantity
+    tokens = {}
+    tokens.start = "You rolled"
+    tokens.modifier = "+#{modifier}" if modifier
     if rolls.length > 1
       rolls.sort()
       rollsTotal = 0
       rollsTotal += i for i in rolls
       rollsTotalPlus = rollsTotal + modifier
-      message.push "for a total of #{rollsTotalPlus}."
+      tokens.rolls = rolls.toString().split(',').join(', ')
+      tokens.total = " for a total of #{rollsTotalPlus}"
     else
-      message.push '.'
-    message.push " Note: #{note}" if note
-    msg.send message.join(' ')
+      tokens.rolls = rolls[0]
+    tokens.note = " Note: #{note}" if note
+    msg.send "#{tokens.start} #{tokens.rolls}#{tokens.modifier or ''}#{tokens.total or ''}.#{tokens.note or ''}"
 
   robot.respond /ore (\d+)( \d+)?( \d+)?( .+)?/im, (msg) ->
     ### <number of dice> [<called>] [<expert>] [<note>] ###
